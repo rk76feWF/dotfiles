@@ -1,0 +1,35 @@
+### tap
+tap "homebrew/bundle" # brew bundle コマンド
+tap "homebrew/cask" # GUI アプリのインストール
+tap "homebrew/services" # brew service コマンド
+tap "homebrew/cask-fonts" # フォント
+tap "homebrew/cask-versions" # 異なるバージョンの cask
+### Casks
+cask "visual-studio-code" # 多機能テキストエディタ
+cask "notion" # Notion
+cask "slack" # Slack
+cask "drawio" # Drawio
+cask "discord" # Discord
+cask "utm" # エミュレータ
+cask "eagle" # 回路設計ソフト
+cask "warp" # Rust製terminal
+cask "cloudflare-warp" # Cloudflareが提供する簡易VPN
+cask "arduino" # Arduino IDE
+cask "processing" # Processing
+cask "numi"
+
+### Homebrew
+brew "mas" # Mac App Store command-line interface
+brew "groff" # GNUの文章整形用プログラム　Macにはデフォで入ってるけど文字化け防止で最新版に更新
+brew "neovim" # Neovim
+brew "ansible"
+brew "gh" # GitHub Cli
+# brew "valgrind" # C/C++メモリリークチェック なんかLinuxが必要とか言って動かない
+brew "translate-shell" # Google翻訳をCLIでやるやつ
+brew "yt-dlp/taps/yt-dlp" # YouTube Download Tool
+brew "tig" # CLIなGitブラウザ
+brew "glow" # CLI Markdown Viewer
+
+### mas
+mas "Microsoft Remote Desktop", id: 1295203466
+mas "GoodNotes 5", id: 1444383602
