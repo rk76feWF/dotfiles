@@ -1,2 +1,2 @@
 Host *
-    IdentityAgent "~/Library/Containers/com.bitwarden.desktop/Data/.bitwarden-ssh-agent.sock"
+    IdentityAgent "~/.bitwarden-ssh-agent.sock"
