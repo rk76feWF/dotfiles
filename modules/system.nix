@@ -36,6 +36,17 @@
   # Starship config
   environment.etc."starship.toml".source = ../config/starship.toml;
 
+  # Deploy dotfiles to user home
+  system.activationScripts.dotfiles.text = ''
+    USER_HOME=/Users/rk76fewf
+    mkdir -p "$USER_HOME/.config/wezterm"
+    ln -sf /etc/dotfiles/wezterm/wezterm.lua "$USER_HOME/.config/wezterm/wezterm.lua"
+    ln -sf /etc/dotfiles/wezterm/keybinds.lua "$USER_HOME/.config/wezterm/keybinds.lua"
+    chown -R rk76fewf:staff "$USER_HOME/.config/wezterm"
+  '';
+  environment.etc."dotfiles/wezterm/wezterm.lua".source = ../config/wezterm/wezterm.lua;
+  environment.etc."dotfiles/wezterm/keybinds.lua".source = ../config/wezterm/keybinds.lua;
+
   # Install Rosetta 2 if not present
   system.activationScripts.rosetta.text = ''
     if ! /usr/bin/pgrep -q oahd; then
