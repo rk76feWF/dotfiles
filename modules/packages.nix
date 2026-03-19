@@ -8,8 +8,7 @@
     curl
     wget
     jq
-    ripgrep
-    fd
+    dig
     htop
     claude-code
     codex
