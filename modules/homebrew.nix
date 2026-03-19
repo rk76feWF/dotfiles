@@ -13,7 +13,7 @@
     enable = true;
     onActivation = {
       autoUpdate = true;
-      cleanup = "zap"; # remove everything not declared here
+      cleanup = "uninstall"; # remove formulae/casks not declared here
     };
 
     taps = [];
