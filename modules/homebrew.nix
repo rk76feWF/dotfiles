@@ -53,31 +53,33 @@ in {
   # Remove App Store apps not declared in masApps
   # Runs in postActivation (after Homebrew bundle)
   system.activationScripts.postActivation.text = lib.mkAfter ''
-    set -euo pipefail
-
     echo >&2 "cleaning up undeclared App Store apps..."
-    MAS_BIN="$(command -v mas || true)"
-    [ -n "$MAS_BIN" ] && [ -x "$MAS_BIN" ] || exit 0
+    (
+      set -euo pipefail
 
-    ALLOWED_IDS=" ${allowedIdsStr} "
-    MAS_TMPFILE=$(/usr/bin/mktemp)
-    trap 'rm -f "$MAS_TMPFILE"' EXIT
+      MAS_BIN="$(command -v mas || true)"
+      [ -n "$MAS_BIN" ] && [ -x "$MAS_BIN" ] || exit 0
 
-    sudo --user=${user} /usr/bin/env HOME="${home}" "$MAS_BIN" list 2>/dev/null | tee "$MAS_TMPFILE" >/dev/null
+      ALLOWED_IDS=" ${allowedIdsStr} "
+      MAS_TMPFILE=$(/usr/bin/mktemp)
+      trap 'rm -f "$MAS_TMPFILE"' EXIT
 
-    while IFS= read -r line; do
-      APP_ID="$(printf '%s\n' "$line" | awk '{print $1}')"
-      [ -n "$APP_ID" ] || continue
-      case "$APP_ID" in
-        *[!0-9]*)
-          echo >&2 "Skipping invalid App Store app id: $APP_ID"
-          continue
-          ;;
-      esac
-      if ! printf '%s\n' "$ALLOWED_IDS" | grep -q " $APP_ID "; then
-        echo >&2 "Removing undeclared App Store app: $line"
-        sudo --user=${user} /usr/bin/env HOME="${home}" "$MAS_BIN" uninstall "$APP_ID"
-      fi
-    done < "$MAS_TMPFILE"
+      sudo --user=${user} /usr/bin/env HOME="${home}" "$MAS_BIN" list 2>/dev/null | tee "$MAS_TMPFILE" >/dev/null
+
+      while IFS= read -r line; do
+        APP_ID="$(printf '%s\n' "$line" | awk '{print $1}')"
+        [ -n "$APP_ID" ] || continue
+        case "$APP_ID" in
+          *[!0-9]*)
+            echo >&2 "Skipping invalid App Store app id: $APP_ID"
+            continue
+            ;;
+        esac
+        if ! printf '%s\n' "$ALLOWED_IDS" | grep -q " $APP_ID "; then
+          echo >&2 "Removing undeclared App Store app: $line"
+          sudo --user=${user} /usr/bin/env HOME="${home}" "$MAS_BIN" uninstall "$APP_ID"
+        fi
+      done < "$MAS_TMPFILE"
+    )
   '';
 }
