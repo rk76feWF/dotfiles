@@ -33,6 +33,13 @@
     };
   };
 
+  # Install Rosetta 2 if not present
+  system.activationScripts.rosetta.text = ''
+    if ! /usr/bin/pgrep -q oahd; then
+      /usr/sbin/softwareupdate --install-rosetta --agree-to-license
+    fi
+  '';
+
   # System state version
   system.stateVersion = 6;
 }
