@@ -20,9 +20,8 @@
 
     # GUI apps via Homebrew Cask
     casks = [
-      # "google-chrome"
-      # "visual-studio-code"
-      # "iterm2"
+      "wezterm"
+      "zed"
     ];
 
     # Mac App Store apps via mas

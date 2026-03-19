@@ -11,6 +11,9 @@
     ripgrep
     fd
     htop
+    (texlive.combine {
+      inherit (texlive) scheme-medium latexmk;
+    })
   ];
 
   # Default shell
