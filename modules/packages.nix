@@ -10,6 +10,7 @@
     jq
     dig
     htop
+    starship
     claude-code
     codex
     (texlive.combine {
@@ -18,5 +19,10 @@
   ];
 
   # Default shell
-  programs.zsh.enable = true;
+  programs.zsh = {
+    enable = true;
+    interactiveShellInit = ''
+      eval "$(starship init zsh)"
+    '';
+  };
 }
