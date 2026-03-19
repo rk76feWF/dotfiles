@@ -20,6 +20,11 @@
 
     # GUI apps via Homebrew Cask
     casks = [
+      "balenaetcher"
+      "discord"
+      "orbstack"
+      "raspberry-pi-imager"
+      "utm"
       "wezterm"
       "zed"
     ];

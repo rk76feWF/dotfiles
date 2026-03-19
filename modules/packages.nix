@@ -11,6 +11,8 @@
     ripgrep
     fd
     htop
+    claude-code
+    codex
     (texlive.combine {
       inherit (texlive) scheme-medium latexmk;
     })
