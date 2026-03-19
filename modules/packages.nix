@@ -9,6 +9,7 @@
     wget
     jq
     dig
+    gh
     htop
     starship
     claude-code
