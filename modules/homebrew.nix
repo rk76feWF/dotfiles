@@ -26,7 +26,10 @@
 
     # Mac App Store apps via mas
     masApps = {
-      # "App Name" = APP_ID;
+      "Bitwarden" = 1352778147;
+      "Tailscale" = 1475387142;
+      "Windows App" = 1295203466;
+      "WireGuard" = 1451685025;
     };
   };
 }
