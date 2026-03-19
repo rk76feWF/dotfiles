@@ -18,6 +18,11 @@
 
     taps = [];
 
+    # CLI tools via Homebrew
+    brews = [
+      "mas"
+    ];
+
     # GUI apps via Homebrew Cask
     casks = [
       "bitwarden"
