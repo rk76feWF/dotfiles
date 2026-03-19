@@ -14,6 +14,11 @@ sh <(curl -L https://nixos.org/nix/install) --daemon
 # Enable flakes
 echo 'experimental-features = nix-command flakes' | sudo tee -a /etc/nix/nix.conf
 sudo launchctl kickstart -k system/org.nixos.nix-daemon
+
+# Rename files that conflict with nix-darwin
+sudo mv /etc/nix/nix.conf /etc/nix/nix.conf.before-nix-darwin
+sudo mv /etc/bashrc /etc/bashrc.before-nix-darwin
+sudo mv /etc/zshrc /etc/zshrc.before-nix-darwin
 ```
 
 ## Install
