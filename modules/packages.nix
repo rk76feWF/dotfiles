@@ -23,6 +23,7 @@
     enable = true;
     promptInit = "";
     interactiveShellInit = ''
+      export STARSHIP_CONFIG=/etc/starship.toml
       eval "$(starship init zsh)"
     '';
   };

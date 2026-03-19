@@ -33,6 +33,9 @@
     };
   };
 
+  # Starship config
+  environment.etc."starship.toml".source = ../config/starship.toml;
+
   # Install Rosetta 2 if not present
   system.activationScripts.rosetta.text = ''
     if ! /usr/bin/pgrep -q oahd; then
