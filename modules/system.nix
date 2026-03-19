@@ -12,7 +12,6 @@
       show-recents = false;
       mru-spaces = false;
       persistent-apps = [
-        "/System/Library/CoreServices/Finder.app"
         "/System/Applications/Launchpad.app"
         "/System/Cryptexes/App/System/Applications/Safari.app"
         "/Applications/Discord.app"
