@@ -53,14 +53,17 @@ in {
     echo >&2 "cleaning up undeclared App Store apps..."
     ALLOWED_IDS=" ${allowedIdsStr} "
     if [ -x /opt/homebrew/bin/mas ]; then
-      /opt/homebrew/bin/mas list 2>/dev/null | while IFS= read -r line; do
+      MAS_TMPFILE=$(/usr/bin/mktemp)
+      /opt/homebrew/bin/mas list > "$MAS_TMPFILE" 2>/dev/null || true
+      while IFS= read -r line; do
         APP_ID=$(echo "$line" | awk '{print $1}')
         [ -n "$APP_ID" ] || continue
         if ! echo "$ALLOWED_IDS" | grep -q " $APP_ID "; then
-          echo "Removing undeclared App Store app: $line"
-          /opt/homebrew/bin/mas uninstall "$APP_ID" || true
+          echo >&2 "Removing undeclared App Store app: $line"
+          /opt/homebrew/bin/mas uninstall "$APP_ID" 2>&1 || true
         fi
-      done
+      done < "$MAS_TMPFILE"
+      rm -f "$MAS_TMPFILE"
     fi
   '';
 }
