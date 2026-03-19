@@ -19,6 +19,12 @@
     })
   ];
 
+  # Git config
+  environment.etc."gitconfig".text = ''
+    [url "git@github.com:"]
+      insteadOf = https://github.com/
+  '';
+
   # Default shell
   programs.zsh = {
     enable = true;

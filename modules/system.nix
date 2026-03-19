@@ -46,6 +46,11 @@ in {
     ln -sfn /etc/dotfiles/wezterm/keybinds.lua "${home}/.config/wezterm/keybinds.lua"
     chown -h ${user}:staff "${home}/.config/wezterm/wezterm.lua" "${home}/.config/wezterm/keybinds.lua"
 
+    # gh config (SSH protocol)
+    install -d -m 0755 -o ${user} -g staff "${home}/.config/gh"
+    ln -sfn /etc/dotfiles/gh/config.yml "${home}/.config/gh/config.yml"
+    chown -h ${user}:staff "${home}/.config/gh/config.yml"
+
     # SSH config (Bitwarden SSH Agent + OrbStack + local overrides)
     install -d -m 0700 -o ${user} -g staff "${home}/.ssh"
     ln -sfn /etc/dotfiles/ssh/config "${home}/.ssh/config"
@@ -59,6 +64,7 @@ in {
   environment.etc."dotfiles/wezterm/wezterm.lua".source = ../config/wezterm/wezterm.lua;
   environment.etc."dotfiles/wezterm/keybinds.lua".source = ../config/wezterm/keybinds.lua;
   environment.etc."dotfiles/ssh/config".source = ../config/ssh/config;
+  environment.etc."dotfiles/gh/config.yml".source = ../config/gh/config.yml;
 
   # Install Rosetta 2 if not present
   system.activationScripts.rosetta.text = ''
