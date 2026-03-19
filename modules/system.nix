@@ -55,6 +55,13 @@ in {
   environment.etc."dotfiles/wezterm/keybinds.lua".source = ../config/wezterm/keybinds.lua;
   environment.etc."dotfiles/ssh/config".source = ../config/ssh/config;
 
+  # Remove App Store version of Bitwarden (replaced by Cask for SSH Agent support)
+  system.activationScripts.removeAppStoreBitwarden.text = ''
+    if [ -d "/Applications/Bitwarden.app" ] && /usr/bin/mdls -name kMDItemAppStoreHasReceipt "/Applications/Bitwarden.app" 2>/dev/null | grep -q "1"; then
+      /bin/rm -rf "/Applications/Bitwarden.app"
+    fi
+  '';
+
   # Install Rosetta 2 if not present
   system.activationScripts.rosetta.text = ''
     if ! /usr/sbin/pkgutil --pkg-info com.apple.pkg.RosettaUpdateAuto >/dev/null 2>&1; then
