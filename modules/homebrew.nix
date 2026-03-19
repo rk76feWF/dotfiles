@@ -55,7 +55,6 @@ in {
     if [ -x /opt/homebrew/bin/mas ]; then
       MAS_TMPFILE=$(/usr/bin/mktemp)
       sudo --user=${config.system.primaryUser} /opt/homebrew/bin/mas list 2>/dev/null | tee "$MAS_TMPFILE" >/dev/null || true
-      echo >&2 "mas list found $(wc -l < "$MAS_TMPFILE" | tr -d ' ') apps"
       while IFS= read -r line; do
         APP_ID=$(echo "$line" | awk '{print $1}')
         [ -n "$APP_ID" ] || continue
