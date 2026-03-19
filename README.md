@@ -21,7 +21,7 @@ sudo launchctl kickstart -k system/org.nixos.nix-daemon
 ```bash
 git clone https://github.com/rk76feWF/dotfiles.git
 cd dotfiles
-nix run nix-darwin -- switch --flake .#macmini
+sudo nix run nix-darwin -- switch --flake .#macmini
 ```
 
 ## Update
@@ -29,5 +29,5 @@ nix run nix-darwin -- switch --flake .#macmini
 ```bash
 cd ~/dotfiles
 git pull
-darwin-rebuild switch --flake .#macmini
+sudo darwin-rebuild switch --flake .#macmini
 ```
