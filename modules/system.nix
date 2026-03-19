@@ -53,10 +53,12 @@ in {
     ln -sfn /etc/dotfiles/git/config "${home}/.gitconfig"
     chown -h ${user}:staff "${home}/.gitconfig"
 
-    # gh config (SSH protocol)
+    # gh config (copy, not symlink — gh needs to write to this file)
     install -d -m 0755 -o ${user} -g staff "${home}/.config/gh"
-    ln -sfn /etc/dotfiles/gh/config.yml "${home}/.config/gh/config.yml"
-    chown -h ${user}:staff "${home}/.config/gh/config.yml"
+    if [ ! -e "${home}/.config/gh/config.yml" ] || [ -L "${home}/.config/gh/config.yml" ]; then
+      rm -f "${home}/.config/gh/config.yml"
+      install -m 0644 -o ${user} -g staff /etc/dotfiles/gh/config.yml "${home}/.config/gh/config.yml"
+    fi
 
     # SSH config (Bitwarden SSH Agent + OrbStack + local overrides)
     install -d -m 0700 -o ${user} -g staff "${home}/.ssh"
