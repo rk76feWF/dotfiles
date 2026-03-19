@@ -16,6 +16,10 @@
       AppleShowAllExtensions = true;
       FXPreferredViewStyle = "Nlsv"; # list view
     };
+    screensaver = {
+      askForPassword = false;
+      askForPasswordDelay = 0;
+    };
     NSGlobalDomain = {
       AppleShowAllExtensions = true;
       InitialKeyRepeat = 15;
