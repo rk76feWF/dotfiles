@@ -26,6 +26,10 @@ cd dotfiles
 sudo nix --extra-experimental-features 'nix-command flakes' run nix-darwin -- switch --flake .#macmini
 ```
 
+## Post-install
+
+OrbStack requires a one-time GUI setup. Open OrbStack from Launchpad and complete the initial setup dialog.
+
 ## Update
 
 ```bash
