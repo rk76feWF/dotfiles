@@ -37,3 +37,5 @@ cd ~/dotfiles
 git pull
 sudo darwin-rebuild switch --flake .#macmini
 ```
+
+> **Note:** `flake.lock` must be committed to the repository to ensure reproducible builds across machines.
