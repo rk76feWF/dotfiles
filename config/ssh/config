@@ -1,0 +1,2 @@
+Host *
+    IdentityAgent "~/Library/Group Containers/LTZ2PFU5D6.com.bitwarden.desktop/t/agent.sock"

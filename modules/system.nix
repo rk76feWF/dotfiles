@@ -45,9 +45,15 @@ in {
     ln -sfn /etc/dotfiles/wezterm/wezterm.lua "${home}/.config/wezterm/wezterm.lua"
     ln -sfn /etc/dotfiles/wezterm/keybinds.lua "${home}/.config/wezterm/keybinds.lua"
     chown -h ${user}:staff "${home}/.config/wezterm/wezterm.lua" "${home}/.config/wezterm/keybinds.lua"
+
+    # SSH config for Bitwarden SSH Agent
+    install -d -m 0700 -o ${user} -g staff "${home}/.ssh"
+    ln -sfn /etc/dotfiles/ssh/config "${home}/.ssh/config"
+    chown -h ${user}:staff "${home}/.ssh/config"
   '';
   environment.etc."dotfiles/wezterm/wezterm.lua".source = ../config/wezterm/wezterm.lua;
   environment.etc."dotfiles/wezterm/keybinds.lua".source = ../config/wezterm/keybinds.lua;
+  environment.etc."dotfiles/ssh/config".source = ../config/ssh/config;
 
   # Install Rosetta 2 if not present
   system.activationScripts.rosetta.text = ''
