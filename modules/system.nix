@@ -1,4 +1,4 @@
-{ config, ... }:
+{ config, lib, ... }:
 
 let
   user = config.system.primaryUser;
@@ -40,17 +40,21 @@ in {
   environment.etc."starship.toml".source = ../config/starship.toml;
 
   # Deploy dotfiles to user home
-  system.activationScripts.dotfiles.text = ''
+  system.activationScripts.dotfiles.text = lib.mkAfter ''
     install -d -m 0755 -o ${user} -g staff "${home}/.config/wezterm"
     ln -sfn /etc/dotfiles/wezterm/wezterm.lua "${home}/.config/wezterm/wezterm.lua"
     ln -sfn /etc/dotfiles/wezterm/keybinds.lua "${home}/.config/wezterm/keybinds.lua"
     chown -h ${user}:staff "${home}/.config/wezterm/wezterm.lua" "${home}/.config/wezterm/keybinds.lua"
 
-    # SSH config (Bitwarden SSH Agent + OrbStack)
+    # SSH config (Bitwarden SSH Agent + OrbStack + local overrides)
     install -d -m 0700 -o ${user} -g staff "${home}/.ssh"
-    cp /etc/dotfiles/ssh/config "${home}/.ssh/config"
-    chmod 600 "${home}/.ssh/config"
-    chown ${user}:staff "${home}/.ssh/config"
+    ln -sfn /etc/dotfiles/ssh/config "${home}/.ssh/config"
+    chown -h ${user}:staff "${home}/.ssh/config"
+    if [ ! -e "${home}/.ssh/config.local" ]; then
+      install -m 0600 -o ${user} -g staff /dev/null "${home}/.ssh/config.local"
+    fi
+    chmod 600 "${home}/.ssh/config.local"
+    chown ${user}:staff "${home}/.ssh/config.local"
   '';
   environment.etc."dotfiles/wezterm/wezterm.lua".source = ../config/wezterm/wezterm.lua;
   environment.etc."dotfiles/wezterm/keybinds.lua".source = ../config/wezterm/keybinds.lua;

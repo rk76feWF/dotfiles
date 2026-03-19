@@ -1,5 +1,6 @@
-# Added by OrbStack: 'orb' SSH host for Linux machines
 Include ~/.orbstack/ssh/config
 
 Host *
     IdentityAgent "~/.bitwarden-ssh-agent.sock"
+
+Include ~/.ssh/config.local
