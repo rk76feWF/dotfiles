@@ -61,7 +61,7 @@ in {
         [ -n "$APP_ID" ] || continue
         if ! echo "$ALLOWED_IDS" | grep -q " $APP_ID "; then
           echo >&2 "Removing undeclared App Store app: $line"
-          /opt/homebrew/bin/mas uninstall "$APP_ID" 2>&1 || true
+          sudo --user=${config.system.primaryUser} /opt/homebrew/bin/mas uninstall "$APP_ID" 2>&1 || true
         fi
       done < "$MAS_TMPFILE"
       rm -f "$MAS_TMPFILE"
