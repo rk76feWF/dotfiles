@@ -39,6 +39,7 @@ in {
       "utm"
       "wezterm"
       "zed"
+      "font-meslo-lg-nerd-font"
     ];
 
     # Mac App Store apps via mas
