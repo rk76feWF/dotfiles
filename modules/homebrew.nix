@@ -48,14 +48,19 @@ in {
   };
 
   # Remove App Store apps not declared in masApps
+  # mas uninstall requires sudo/TTY, so use rm directly (activation runs as root)
   system.activationScripts.masCleanup.text = ''
     ALLOWED_IDS="${allowedIdsStr}"
     if [ -x /opt/homebrew/bin/mas ]; then
       /opt/homebrew/bin/mas list 2>/dev/null | while read -r line; do
         APP_ID=$(echo "$line" | awk '{print $1}')
         if ! echo " $ALLOWED_IDS " | grep -q " $APP_ID "; then
-          echo "Removing undeclared App Store app: $line"
-          /opt/homebrew/bin/mas uninstall "$APP_ID" || true
+          APP_NAME=$(echo "$line" | awk '{print $2}')
+          APP_PATH="/Applications/$APP_NAME.app"
+          if [ -d "$APP_PATH" ]; then
+            echo "Removing undeclared App Store app: $APP_NAME ($APP_ID)"
+            rm -rf "$APP_PATH"
+          fi
         fi
       done
     fi
