@@ -19,17 +19,6 @@
     })
   ];
 
-  # Git config
-  environment.etc."gitconfig".text = ''
-    [user]
-      name = FUKUMOTO Yuki
-      email = rk76fewf@gmail.com
-    [credential "https://github.com"]
-      helper = !/run/current-system/sw/bin/gh auth git-credential
-    [credential "https://gist.github.com"]
-      helper = !/run/current-system/sw/bin/gh auth git-credential
-  '';
-
   # Default shell
   programs.zsh = {
     enable = true;

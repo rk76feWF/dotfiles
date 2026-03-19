@@ -46,6 +46,10 @@ in {
     ln -sfn /etc/dotfiles/wezterm/keybinds.lua "${home}/.config/wezterm/keybinds.lua"
     chown -h ${user}:staff "${home}/.config/wezterm/wezterm.lua" "${home}/.config/wezterm/keybinds.lua"
 
+    # Git config (~/.gitconfig — Nix git ignores /etc/gitconfig)
+    ln -sfn /etc/dotfiles/git/config "${home}/.gitconfig"
+    chown -h ${user}:staff "${home}/.gitconfig"
+
     # gh config (SSH protocol)
     install -d -m 0755 -o ${user} -g staff "${home}/.config/gh"
     ln -sfn /etc/dotfiles/gh/config.yml "${home}/.config/gh/config.yml"
@@ -64,6 +68,7 @@ in {
   environment.etc."dotfiles/wezterm/wezterm.lua".source = ../config/wezterm/wezterm.lua;
   environment.etc."dotfiles/wezterm/keybinds.lua".source = ../config/wezterm/keybinds.lua;
   environment.etc."dotfiles/ssh/config".source = ../config/ssh/config;
+  environment.etc."dotfiles/git/config".source = ../config/git/config;
   environment.etc."dotfiles/gh/config.yml".source = ../config/gh/config.yml;
 
   # Install Rosetta 2 if not present
