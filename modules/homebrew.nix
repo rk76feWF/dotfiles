@@ -48,21 +48,19 @@ in {
   };
 
   # Remove App Store apps not declared in masApps
-  # Depends on homebrew activation to ensure mas is installed first
-  system.activationScripts.masCleanup = {
-    deps = [ "homebrew" ];
-    text = ''
-      ALLOWED_IDS=" ${allowedIdsStr} "
-      if [ -x /opt/homebrew/bin/mas ]; then
-        /opt/homebrew/bin/mas list 2>/dev/null | while IFS= read -r line; do
-          APP_ID=$(echo "$line" | awk '{print $1}')
-          [ -n "$APP_ID" ] || continue
-          if ! echo "$ALLOWED_IDS" | grep -q " $APP_ID "; then
-            echo "Removing undeclared App Store app: $line"
-            /opt/homebrew/bin/mas uninstall "$APP_ID" || true
-          fi
-        done
-      fi
-    '';
-  };
+  # Appended to extraActivation so it runs after Homebrew bundle
+  system.activationScripts.extraActivation.text = lib.mkAfter ''
+    echo >&2 "cleaning up undeclared App Store apps..."
+    ALLOWED_IDS=" ${allowedIdsStr} "
+    if [ -x /opt/homebrew/bin/mas ]; then
+      /opt/homebrew/bin/mas list 2>/dev/null | while IFS= read -r line; do
+        APP_ID=$(echo "$line" | awk '{print $1}')
+        [ -n "$APP_ID" ] || continue
+        if ! echo "$ALLOWED_IDS" | grep -q " $APP_ID "; then
+          echo "Removing undeclared App Store app: $line"
+          /opt/homebrew/bin/mas uninstall "$APP_ID" || true
+        fi
+      done
+    fi
+  '';
 }
