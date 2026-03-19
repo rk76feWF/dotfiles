@@ -49,7 +49,7 @@ in {
 
   # Remove App Store apps not declared in masApps
   # Appended to extraActivation so it runs after Homebrew bundle
-  system.activationScripts.extraActivation.text = lib.mkAfter ''
+  system.activationScripts.postActivation.text = lib.mkAfter ''
     echo >&2 "cleaning up undeclared App Store apps..."
     ALLOWED_IDS=" ${allowedIdsStr} "
     if [ -x /opt/homebrew/bin/mas ]; then
