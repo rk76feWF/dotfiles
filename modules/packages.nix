@@ -21,6 +21,7 @@
   # Default shell
   programs.zsh = {
     enable = true;
+    promptInit = "";
     interactiveShellInit = ''
       eval "$(starship init zsh)"
     '';
