@@ -63,7 +63,7 @@ in {
     MAS_TMPFILE=$(/usr/bin/mktemp)
     trap 'rm -f "$MAS_TMPFILE"' EXIT
 
-    sudo --user=${user} /usr/bin/env HOME="${home}" "$MAS_BIN" list >"$MAS_TMPFILE" 2>/dev/null
+    sudo --user=${user} /usr/bin/env HOME="${home}" "$MAS_BIN" list 2>/dev/null | tee "$MAS_TMPFILE" >/dev/null
 
     while IFS= read -r line; do
       APP_ID="$(printf '%s\n' "$line" | awk '{print $1}')"
