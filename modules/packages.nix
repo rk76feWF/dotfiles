@@ -19,6 +19,13 @@
     })
   ];
 
+  # Git config
+  environment.etc."gitconfig".text = ''
+    [user]
+      name = FUKUMOTO Yuki
+      email = rk76fewf@gmail.com
+  '';
+
   # Default shell
   programs.zsh = {
     enable = true;
