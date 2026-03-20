@@ -69,7 +69,10 @@ in {
       MAS_TMPFILE=$(/usr/bin/mktemp)
       trap 'rm -f "$MAS_TMPFILE"' EXIT
 
-      sudo --user=${user} /usr/bin/env HOME="${home}" "$MAS_BIN" list 2>/dev/null | tee "$MAS_TMPFILE" >/dev/null
+      if ! sudo --user=${user} /usr/bin/env HOME="${home}" "$MAS_BIN" list 2>/dev/null | tee "$MAS_TMPFILE" >/dev/null; then
+        echo >&2 "warning: mas list failed; skipping App Store cleanup"
+        exit 0
+      fi
 
       while IFS= read -r line; do
         APP_ID="$(printf '%s\n' "$line" | awk '{print $1}')"

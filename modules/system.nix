@@ -1,8 +1,12 @@
-{ config, lib, ... }:
+{ config, lib, pkgs, ... }:
 
 let
   user = config.system.primaryUser;
   home = config.users.users.${user}.home;
+  whisperModel = pkgs.fetchurl {
+    url = "https://huggingface.co/ggerganov/whisper.cpp/resolve/main/ggml-large-v3-turbo.bin";
+    hash = "sha256-H8cPd0046xaZk6w5Huo1fvR8iHV+9y7llDh5t+jivGk=";
+  };
 in {
   # Nix settings
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
@@ -75,15 +79,11 @@ in {
     chmod 600 "${home}/.ssh/config.local"
     chown ${user}:staff "${home}/.ssh/config.local"
 
-    # whisper.cpp model (large-v3-turbo)
+    # whisper.cpp model (large-v3-turbo, managed by Nix store)
     WHISPER_MODEL_DIR="${home}/.local/share/whisper-cpp"
-    WHISPER_MODEL="$WHISPER_MODEL_DIR/ggml-large-v3-turbo.bin"
-    if [ ! -f "$WHISPER_MODEL" ]; then
-      echo >&2 "downloading whisper model (large-v3-turbo)..."
-      install -d -m 0755 -o ${user} -g staff "$WHISPER_MODEL_DIR"
-      sudo --user=${user} curl -L -o "$WHISPER_MODEL" \
-        "https://huggingface.co/ggerganov/whisper.cpp/resolve/main/ggml-large-v3-turbo.bin"
-    fi
+    install -d -m 0755 -o ${user} -g staff "$WHISPER_MODEL_DIR"
+    ln -sfn "${whisperModel}" "$WHISPER_MODEL_DIR/ggml-large-v3-turbo.bin"
+    chown -h ${user}:staff "$WHISPER_MODEL_DIR/ggml-large-v3-turbo.bin"
 
     # Install Rosetta 2 if not present
     if ! /usr/sbin/pkgutil --pkg-info com.apple.pkg.RosettaUpdateAuto >/dev/null 2>&1; then
