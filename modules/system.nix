@@ -75,6 +75,16 @@ in {
     chmod 600 "${home}/.ssh/config.local"
     chown ${user}:staff "${home}/.ssh/config.local"
 
+    # whisper.cpp model (large-v3-turbo)
+    WHISPER_MODEL_DIR="${home}/.local/share/whisper-cpp"
+    WHISPER_MODEL="$WHISPER_MODEL_DIR/ggml-large-v3-turbo.bin"
+    if [ ! -f "$WHISPER_MODEL" ]; then
+      echo >&2 "downloading whisper model (large-v3-turbo)..."
+      install -d -m 0755 -o ${user} -g staff "$WHISPER_MODEL_DIR"
+      sudo --user=${user} curl -L -o "$WHISPER_MODEL" \
+        "https://huggingface.co/ggerganov/whisper.cpp/resolve/main/ggml-large-v3-turbo.bin"
+    fi
+
     # Install Rosetta 2 if not present
     if ! /usr/sbin/pkgutil --pkg-info com.apple.pkg.RosettaUpdateAuto >/dev/null 2>&1; then
       /usr/sbin/softwareupdate --install-rosetta --agree-to-license
