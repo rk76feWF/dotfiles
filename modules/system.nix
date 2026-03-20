@@ -51,6 +51,9 @@ in {
       AppleShowAllExtensions = true;
       InitialKeyRepeat = 15;
       KeyRepeat = 2;
+      NSDocumentSaveNewDocumentsToCloud = false;
+      NSNavPanelExpandedStateForSaveMode = true;
+      NSNavPanelExpandedStateForSaveMode2 = true;
     };
   };
 
