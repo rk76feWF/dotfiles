@@ -34,7 +34,13 @@ in {
     };
     finder = {
       AppleShowAllExtensions = true;
+      AppleShowAllFiles = true;
+      ShowPathbar = true;
+      ShowStatusBar = true;
       FXPreferredViewStyle = "Nlsv"; # list view
+      FXDefaultSearchScope = "SCcf"; # search current folder
+      FXEnableExtensionChangeWarning = false;
+      NewWindowTarget = "Home";
     };
     screensaver = {
       askForPassword = false;
