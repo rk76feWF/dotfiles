@@ -37,6 +37,7 @@ in {
       AppleShowAllFiles = true;
       ShowPathbar = true;
       ShowStatusBar = true;
+      _FXShowPosixPathInTitle = true;
       FXPreferredViewStyle = "Nlsv"; # list view
       FXDefaultSearchScope = "SCcf"; # search current folder
       FXEnableExtensionChangeWarning = false;
