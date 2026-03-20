@@ -4,6 +4,7 @@
   # CLI tools from Nix store
   environment.systemPackages = with pkgs; [
     git
+    git-lfs
     vim
     curl
     wget

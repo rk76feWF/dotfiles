@@ -1,0 +1,11 @@
+# 1Password SSH Agent key selection
+# All SSH keys in all vaults are offered by default.
+# Add [[ssh-keys]] sections to restrict which keys are offered.
+#
+# Examples:
+#   [[ssh-keys]]
+#   vault = "Private"
+#
+#   [[ssh-keys]]
+#   item = "GitHub SSH Key"
+#   vault = "Development"

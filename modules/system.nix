@@ -74,7 +74,12 @@ in {
       install -m 0644 -o ${user} -g staff /etc/dotfiles/gh/config.yml "${home}/.config/gh/config.yml"
     fi
 
-    # SSH config (Bitwarden SSH Agent + OrbStack + local overrides)
+    # 1Password SSH Agent config
+    install -d -m 0755 -o ${user} -g staff "${home}/.config/1Password/ssh"
+    ln -sfn /etc/dotfiles/1password/ssh/agent.toml "${home}/.config/1Password/ssh/agent.toml"
+    chown -h ${user}:staff "${home}/.config/1Password/ssh/agent.toml"
+
+    # SSH config (1Password SSH Agent + OrbStack + local overrides)
     install -d -m 0700 -o ${user} -g staff "${home}/.ssh"
     ln -sfn /etc/dotfiles/ssh/config "${home}/.ssh/config"
     chown -h ${user}:staff "${home}/.ssh/config"
@@ -107,6 +112,7 @@ in {
   environment.etc."dotfiles/git/config".source = ../config/git/config;
   environment.etc."dotfiles/gh/config.yml".source = ../config/gh/config.yml;
   environment.etc."dotfiles/hammerspoon/init.lua".source = ../config/hammerspoon/init.lua;
+  environment.etc."dotfiles/1password/ssh/agent.toml".source = ../config/1password/ssh/agent.toml;
 
   # System state version
   system.stateVersion = 6;
