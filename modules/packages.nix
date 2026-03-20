@@ -11,7 +11,6 @@
     jq
     dig
     ffmpeg
-    gh
     htop
     iperf3
     nmap

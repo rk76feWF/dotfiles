@@ -19,19 +19,17 @@
   # 1Password SSH Agent config
   home.file.".config/1Password/ssh/agent.toml".source = ../config/1password/ssh/agent.toml;
 
-  # gh config (copy, not symlink — gh needs write access)
-  # SSH config.local (create empty if not exists)
-  # SSH directory permissions
-  home.activation.deployMutable = lib.hm.dag.entryAfter [ "writeBoundary" ] ''
-    # gh config (copy, not symlink — gh needs to write to this file)
-    mkdir -p "$HOME/.config/gh"
-    if [ ! -e "$HOME/.config/gh/config.yml" ] || [ -L "$HOME/.config/gh/config.yml" ]; then
-      rm -f "$HOME/.config/gh/config.yml"
-      cp ${../config/gh/config.yml} "$HOME/.config/gh/config.yml"
-      chmod 644 "$HOME/.config/gh/config.yml"
-    fi
+  # GitHub CLI (config.yml is managed declaratively; hosts.yml stays mutable for gh auth login)
+  programs.gh = {
+    enable = true;
+    gitCredentialHelper.enable = false; # managed manually in config/git/config
+    settings = {
+      git_protocol = "ssh";
+    };
+  };
 
-    # SSH directory and config.local permissions
+  # SSH directory permissions and config.local (create empty if not exists)
+  home.activation.deploySsh = lib.hm.dag.entryAfter [ "writeBoundary" ] ''
     mkdir -p "$HOME/.ssh"
     chmod 700 "$HOME/.ssh"
     if [ ! -e "$HOME/.ssh/config.local" ]; then
