@@ -14,6 +14,7 @@
     iperf3
     nmap
     starship
+    whisper-cpp
     claude-code
     codex
     (texlive.combine {
