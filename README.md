@@ -39,7 +39,7 @@ Hammerspoon requires one-time setup:
 3. "Enable Accessibility" をクリック → System Settings → Privacy & Security → Accessibility → Hammerspoon を ON
 4. メニューバーの Hammerspoon アイコン → Reload Config
 
-iCloud Private Relay を有効にする: System Settings → Apple ID → iCloud → Private Relay → ON
+iCloud Private Relay を有効にする: System Settings → Apple ID → iCloud → Private Relay → ON → IP Address Location を「Country and time zone」に変更
 
 ```bash
 # GitHub CLI login (SSH protocol is pre-configured)
