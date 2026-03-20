@@ -49,6 +49,11 @@ in {
     ln -sfn /etc/dotfiles/wezterm/keybinds.lua "${home}/.config/wezterm/keybinds.lua"
     chown -h ${user}:staff "${home}/.config/wezterm/wezterm.lua" "${home}/.config/wezterm/keybinds.lua"
 
+    # Hammerspoon config
+    install -d -m 0755 -o ${user} -g staff "${home}/.hammerspoon"
+    ln -sfn /etc/dotfiles/hammerspoon/init.lua "${home}/.hammerspoon/init.lua"
+    chown -h ${user}:staff "${home}/.hammerspoon/init.lua"
+
     # Git config (~/.gitconfig — Nix git ignores /etc/gitconfig)
     ln -sfn /etc/dotfiles/git/config "${home}/.gitconfig"
     chown -h ${user}:staff "${home}/.gitconfig"
@@ -80,6 +85,7 @@ in {
   environment.etc."dotfiles/ssh/config".source = ../config/ssh/config;
   environment.etc."dotfiles/git/config".source = ../config/git/config;
   environment.etc."dotfiles/gh/config.yml".source = ../config/gh/config.yml;
+  environment.etc."dotfiles/hammerspoon/init.lua".source = ../config/hammerspoon/init.lua;
 
   # System state version
   system.stateVersion = 6;

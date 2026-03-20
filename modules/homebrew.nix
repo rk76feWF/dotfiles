@@ -40,6 +40,7 @@ in {
       "wezterm"
       "zed"
       "font-meslo-lg-nerd-font"
+      "hammerspoon"
     ];
 
     # Mac App Store apps via mas
