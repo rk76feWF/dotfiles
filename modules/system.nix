@@ -27,9 +27,9 @@ in {
       persistent-apps = [
         "/System/Applications/Launchpad.app"
         "/System/Cryptexes/App/System/Applications/Safari.app"
-        "/Applications/1Password.app"
         "/Applications/Discord.app"
         "/Applications/WezTerm.app"
+        "/Applications/1Password.app"
       ];
       persistent-others = [];
     };
