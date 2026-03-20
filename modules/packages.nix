@@ -13,6 +13,7 @@
     ffmpeg
     htop
     iperf3
+    mise
     nmap
     starship
     tree
