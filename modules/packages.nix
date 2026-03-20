@@ -9,6 +9,7 @@
     wget
     jq
     dig
+    ffmpeg
     gh
     htop
     iperf3
