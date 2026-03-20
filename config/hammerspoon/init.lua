@@ -38,8 +38,8 @@ hs.hotkey.bind(mod, "j", function()
   win:setFrame(hs.geometry.rect(screen.x, screen.y + screen.h / 2, screen.w, screen.h / 2))
 end)
 
--- Ctrl+Option+f: maximize
-hs.hotkey.bind(mod, "f", function()
+-- Ctrl+Option+Return: maximize
+hs.hotkey.bind(mod, "return", function()
   local win = hs.window.focusedWindow()
   if not win then return end
   win:setFrame(win:screen():frame())
