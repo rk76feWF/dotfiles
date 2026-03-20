@@ -30,6 +30,7 @@ in {
         "/Applications/Discord.app"
         "/Applications/WezTerm.app"
       ];
+      persistent-others = [];
     };
     finder = {
       AppleShowAllExtensions = true;
