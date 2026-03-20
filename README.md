@@ -30,6 +30,8 @@ sudo nix --extra-experimental-features 'nix-command flakes' run nix-darwin -- sw
 
 OrbStack requires a one-time GUI setup. Open OrbStack from Launchpad and complete the initial setup dialog.
 
+Hammerspoon requires accessibility permission. Open Hammerspoon from Launchpad, then grant access in System Settings → Privacy & Security → Accessibility.
+
 ```bash
 # GitHub CLI login (SSH protocol is pre-configured)
 gh auth login
