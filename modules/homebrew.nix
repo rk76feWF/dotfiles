@@ -40,7 +40,7 @@ in {
       "raspberry-pi-imager"
       "utm"
       "wezterm"
-      "wireshark"
+      "wireshark-app"
       "zed"
       "font-meslo-lg-nerd-font"
       "hammerspoon"
