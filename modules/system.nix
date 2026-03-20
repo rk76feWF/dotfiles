@@ -39,6 +39,7 @@ in {
       ShowStatusBar = true;
       _FXShowPosixPathInTitle = true;
       FXPreferredViewStyle = "Nlsv"; # list view
+      _FXSortFoldersFirst = true;
       FXDefaultSearchScope = "SCcf"; # search current folder
       FXEnableExtensionChangeWarning = false;
       NewWindowTarget = "Home";
