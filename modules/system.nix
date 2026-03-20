@@ -7,6 +7,11 @@ let
     url = "https://huggingface.co/ggerganov/whisper.cpp/resolve/main/ggml-large-v3-turbo.bin";
     hash = "sha256-H8cPd0046xaZk6w5Huo1fvR8iHV+9y7llDh5t+jivGk=";
   };
+  whisperCoreML = pkgs.fetchzip {
+    url = "https://huggingface.co/ggerganov/whisper.cpp/resolve/main/ggml-large-v3-turbo-encoder.mlmodelc.zip";
+    hash = "sha256-363/FR6kbq3j2eapZuLBPOSu5Efx1ixCj+o+9LRnTs4=";
+    stripRoot = false;
+  };
 in {
   # Nix settings
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
@@ -84,6 +89,12 @@ in {
     install -d -m 0755 -o ${user} -g staff "$WHISPER_MODEL_DIR"
     ln -sfn "${whisperModel}" "$WHISPER_MODEL_DIR/ggml-large-v3-turbo.bin"
     chown -h ${user}:staff "$WHISPER_MODEL_DIR/ggml-large-v3-turbo.bin"
+
+    # whisper.cpp Core ML encoder model (copy, not symlink — ANE may write cache)
+    if [ ! -d "$WHISPER_MODEL_DIR/ggml-large-v3-turbo-encoder.mlmodelc" ]; then
+      cp -R "${whisperCoreML}/ggml-large-v3-turbo-encoder.mlmodelc" "$WHISPER_MODEL_DIR/"
+      chown -R ${user}:staff "$WHISPER_MODEL_DIR/ggml-large-v3-turbo-encoder.mlmodelc"
+    fi
 
     # Install Rosetta 2 if not present
     if ! /usr/sbin/pkgutil --pkg-info com.apple.pkg.RosettaUpdateAuto >/dev/null 2>&1; then
