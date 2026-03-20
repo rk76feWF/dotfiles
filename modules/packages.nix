@@ -11,6 +11,8 @@
     dig
     gh
     htop
+    iperf3
+    nmap
     starship
     claude-code
     codex
