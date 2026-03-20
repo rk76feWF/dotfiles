@@ -39,6 +39,17 @@ Hammerspoon requires one-time setup:
 3. "Enable Accessibility" をクリック → System Settings → Privacy & Security → Accessibility → Hammerspoon を ON
 4. メニューバーの Hammerspoon アイコン → Reload Config
 
+1Password requires one-time setup:
+
+1. Open 1Password from Launchpad and sign in
+2. Settings > Security → **Touch ID** を ON
+3. Settings > Developer → **Set Up SSH Agent** を ON
+   - 「SSHキー名をディスクに保存」→「キー名の使用」を選択
+4. Settings > Developer → **Integrate with 1Password CLI** を ON
+5. Settings > General → **Start at login** を ON
+6. Safari → Settings → Extensions → **1Password** を ON
+7. SSH鍵を1Passwordで作成し、GitHubに公開鍵を登録
+
 iCloud Private Relay を有効にする: System Settings → Apple ID → iCloud → Private Relay → ON → IP Address Location を「Country and time zone」に変更
 
 ```bash
