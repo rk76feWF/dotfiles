@@ -31,6 +31,8 @@ in {
 
     # GUI apps via Homebrew Cask
     casks = [
+      "affinity"
+      "antigravity"
       "bitwarden"
       "balenaetcher"
       "discord"
