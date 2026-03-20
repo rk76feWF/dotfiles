@@ -50,6 +50,7 @@ in {
 
     # Mac App Store apps via mas
     masApps = {
+      "1Password for Safari" = 1569813296;
       "Slack" = 803453959;
       "Tailscale" = 1475387142;
       "Windows App" = 1295203466;
