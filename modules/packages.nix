@@ -15,6 +15,7 @@
     iperf3
     nmap
     starship
+    tree
     whisper-cpp
     claude-code
     codex
