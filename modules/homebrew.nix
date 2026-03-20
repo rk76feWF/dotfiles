@@ -38,6 +38,7 @@ in {
       "raspberry-pi-imager"
       "utm"
       "wezterm"
+      "wireshark"
       "zed"
       "font-meslo-lg-nerd-font"
       "hammerspoon"
