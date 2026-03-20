@@ -22,20 +22,36 @@ hs.hotkey.bind(mod, "l", function()
   win:setFrame(hs.geometry.rect(screen.x + screen.w / 2, screen.y, screen.w / 2, screen.h))
 end)
 
--- Ctrl+Option+k: top half
-hs.hotkey.bind(mod, "k", function()
+-- Ctrl+Option+u: top-left quarter
+hs.hotkey.bind(mod, "u", function()
   local win = hs.window.focusedWindow()
   if not win then return end
   local screen = win:screen():frame()
-  win:setFrame(hs.geometry.rect(screen.x, screen.y, screen.w, screen.h / 2))
+  win:setFrame(hs.geometry.rect(screen.x, screen.y, screen.w / 2, screen.h / 2))
 end)
 
--- Ctrl+Option+j: bottom half
+-- Ctrl+Option+i: top-right quarter
+hs.hotkey.bind(mod, "i", function()
+  local win = hs.window.focusedWindow()
+  if not win then return end
+  local screen = win:screen():frame()
+  win:setFrame(hs.geometry.rect(screen.x + screen.w / 2, screen.y, screen.w / 2, screen.h / 2))
+end)
+
+-- Ctrl+Option+j: bottom-left quarter
 hs.hotkey.bind(mod, "j", function()
   local win = hs.window.focusedWindow()
   if not win then return end
   local screen = win:screen():frame()
-  win:setFrame(hs.geometry.rect(screen.x, screen.y + screen.h / 2, screen.w, screen.h / 2))
+  win:setFrame(hs.geometry.rect(screen.x, screen.y + screen.h / 2, screen.w / 2, screen.h / 2))
+end)
+
+-- Ctrl+Option+k: bottom-right quarter
+hs.hotkey.bind(mod, "k", function()
+  local win = hs.window.focusedWindow()
+  if not win then return end
+  local screen = win:screen():frame()
+  win:setFrame(hs.geometry.rect(screen.x + screen.w / 2, screen.y + screen.h / 2, screen.w / 2, screen.h / 2))
 end)
 
 -- Ctrl+Option+Return: maximize
@@ -43,20 +59,6 @@ hs.hotkey.bind(mod, "return", function()
   local win = hs.window.focusedWindow()
   if not win then return end
   win:setFrame(win:screen():frame())
-end)
-
--- Ctrl+Option+c: center (60% of screen)
-hs.hotkey.bind(mod, "c", function()
-  local win = hs.window.focusedWindow()
-  if not win then return end
-  local screen = win:screen():frame()
-  local w = screen.w * 0.6
-  local h = screen.h * 0.6
-  win:setFrame(hs.geometry.rect(
-    screen.x + (screen.w - w) / 2,
-    screen.y + (screen.h - h) / 2,
-    w, h
-  ))
 end)
 
 -- Option+Space: toggle WezTerm (launch/focus or hide)
