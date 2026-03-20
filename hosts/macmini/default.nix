@@ -14,4 +14,6 @@
     name = "rk76fewf";
     home = "/Users/rk76fewf";
   };
+
+  home-manager.users.rk76fewf = import ../../modules/home.nix;
 }
