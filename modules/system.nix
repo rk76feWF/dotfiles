@@ -14,6 +14,7 @@ let
   };
 in {
   # Nix settings
+  nix.gc.automatic = true;
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
   nixpkgs.config.allowUnfree = true;
 
