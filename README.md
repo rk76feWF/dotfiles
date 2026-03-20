@@ -11,10 +11,10 @@ xcode-select --install
 # Nix
 sh <(curl -L https://nixos.org/nix/install) --daemon
 
-# Rename files that conflict with nix-darwin
-sudo mv /etc/nix/nix.conf /etc/nix/nix.conf.before-nix-darwin
-sudo mv /etc/bashrc /etc/bashrc.before-nix-darwin
-sudo mv /etc/zshrc /etc/zshrc.before-nix-darwin
+# Rename files that conflict with nix-darwin (if they exist)
+[ -f /etc/nix/nix.conf ] && sudo mv /etc/nix/nix.conf /etc/nix/nix.conf.before-nix-darwin
+[ -f /etc/bashrc ] && ! [ -L /etc/bashrc ] && sudo mv /etc/bashrc /etc/bashrc.before-nix-darwin
+[ -f /etc/zshrc ] && ! [ -L /etc/zshrc ] && sudo mv /etc/zshrc /etc/zshrc.before-nix-darwin
 ```
 
 ## Install
