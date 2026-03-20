@@ -59,7 +59,14 @@ hs.hotkey.bind(mod, "c", function()
   ))
 end)
 
--- Option+Space: launch or focus WezTerm
+-- Option+Space: toggle WezTerm (launch/focus or hide)
 hs.hotkey.bind({ "alt" }, "space", function()
-  hs.application.launchOrFocus("WezTerm")
+  local app = hs.application.get("WezTerm")
+  if app and app:isFrontmost() then
+    app:hide()
+  elseif app then
+    app:activate()
+  else
+    hs.application.launchOrFocus("WezTerm")
+  end
 end)
