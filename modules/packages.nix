@@ -15,6 +15,7 @@
     iperf3
     mise
     nmap
+    rclone
     starship
     tree
     whisper-cpp
