@@ -38,6 +38,7 @@ in {
       "bitwarden"
       "balenaetcher"
       "discord"
+      "microsoft-onedrive"
       "orbstack"
       "raspberry-pi-imager"
       "utm"
