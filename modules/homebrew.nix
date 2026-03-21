@@ -38,7 +38,6 @@ in {
       "bitwarden"
       "balenaetcher"
       "discord"
-      "onedrive"
       "orbstack"
       "raspberry-pi-imager"
       "utm"
@@ -56,6 +55,7 @@ in {
       "Tailscale" = 1475387142;
       "Windows App" = 1295203466;
       "WireGuard" = 1451685025;
+      "OneDrive" = 823766827;
     };
   };
 
