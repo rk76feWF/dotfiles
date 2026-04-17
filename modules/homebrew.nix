@@ -62,7 +62,7 @@ in {
 
   # Remove App Store apps not declared in masApps
   # Runs in postActivation (after Homebrew bundle)
-  system.activationScripts.postActivation.text = lib.mkAfter ''
+  system.activationScripts.cleanupMasApps.text = lib.mkAfter ''
     echo >&2 "cleaning up undeclared App Store apps..."
     (
       set -euo pipefail

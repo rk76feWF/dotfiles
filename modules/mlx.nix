@@ -6,11 +6,12 @@ let
   venvDir = "${home}/Models/.venv";
   venvPython = "${venvDir}/bin/python";
   hfHome = "${home}/Models/huggingface";
+  mlxVlmVersion = "0.4.4";
   model = "mlx-community/gemma-4-e4b-it-4bit";
   port = "8081";
 in {
   # Ensure venv with mlx-vlm is created
-  system.activationScripts.postActivation.text = lib.mkAfter ''
+  system.activationScripts.setupMlxVenv.text = lib.mkAfter ''
     echo >&2 "setting up MLX venv..."
     MISE_DATA_DIR="${home}/.local/share/mise"
     MISE_PYTHON="$(find "$MISE_DATA_DIR/installs/python" -maxdepth 1 -mindepth 1 -type d 2>/dev/null | head -1)"
@@ -18,7 +19,7 @@ in {
       if [ ! -f "${venvDir}/bin/python" ]; then
         sudo --user=${user} "$MISE_PYTHON/bin/python" -m venv "${venvDir}"
       fi
-      sudo --user=${user} "${venvDir}/bin/pip" install -q --upgrade mlx-vlm 2>/dev/null
+      sudo --user=${user} "${venvDir}/bin/pip" install -q --disable-pip-version-check "mlx-vlm==${mlxVlmVersion}" 2>/dev/null
     else
       echo >&2 "warning: mise python not found, skipping MLX venv setup"
     fi
