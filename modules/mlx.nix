@@ -5,6 +5,7 @@ let
   home = config.users.users.${user}.home;
   venvDir = "${home}/Models/.venv";
   venvPython = "${venvDir}/bin/python";
+  hfHome = "${home}/Models/huggingface";
   model = "mlx-community/gemma-4-e4b-it-4bit";
   port = "8081";
 in {
@@ -30,6 +31,9 @@ in {
         "--model" model
         "--port" port
       ];
+      EnvironmentVariables = {
+        HF_HOME = hfHome;
+      };
       KeepAlive = true;
       RunAtLoad = true;
       StandardOutPath = "/tmp/mlx-server.log";
