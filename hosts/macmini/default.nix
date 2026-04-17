@@ -5,6 +5,7 @@
     ../../modules/system.nix
     ../../modules/homebrew.nix
     ../../modules/packages.nix
+    ../../modules/mlx.nix
   ];
 
   networking.hostName = "macmini";
