@@ -21,10 +21,6 @@
     whisper-cpp
     claude-code
     codex
-    (python312.withPackages (ps: with ps; [
-      mlx
-      mlx-lm
-    ]))
     (texlive.combine {
       inherit (texlive) scheme-medium latexmk;
     })
