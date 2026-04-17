@@ -29,6 +29,7 @@ in {
         "${venvPython}"
         "-m" "mlx_lm.server"
         "--model" model
+        "--host" "0.0.0.0"
         "--port" port
       ];
       EnvironmentVariables = {
