@@ -47,7 +47,6 @@ in {
       "zed"
       "font-meslo-lg-nerd-font"
       "hammerspoon"
-      "ollama"
     ];
 
     # Mac App Store apps via mas
