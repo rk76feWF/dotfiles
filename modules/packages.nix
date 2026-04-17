@@ -19,6 +19,7 @@
     starship
     tree
     whisper-cpp
+    llama-cpp
     claude-code
     codex
     (texlive.combine {
