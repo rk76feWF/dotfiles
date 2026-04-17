@@ -14,7 +14,7 @@ in {
   system.activationScripts.postActivation.text = lib.mkAfter ''
     echo >&2 "setting up MLX venv..."
     MISE_DATA_DIR="${home}/.local/share/mise"
-    MISE_PYTHON="$MISE_DATA_DIR/installs/python/$(ls "$MISE_DATA_DIR/installs/python/" 2>/dev/null | head -1)"
+    MISE_PYTHON="$(find "$MISE_DATA_DIR/installs/python" -maxdepth 1 -mindepth 1 -type d 2>/dev/null | head -1)"
     if [ -n "$MISE_PYTHON" ] && [ -x "$MISE_PYTHON/bin/python" ]; then
       if [ ! -f "${venvDir}/bin/python" ]; then
         sudo --user=${user} "$MISE_PYTHON/bin/python" -m venv "${venvDir}"
