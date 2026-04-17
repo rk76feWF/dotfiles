@@ -9,7 +9,7 @@ let
   model = "mlx-community/gemma-4-e4b-it-4bit";
   port = "8081";
 in {
-  # Ensure venv with mlx-lm is created
+  # Ensure venv with mlx-vlm is created
   system.activationScripts.postActivation.text = lib.mkAfter ''
     echo >&2 "setting up MLX venv..."
     MISE_DATA_DIR="${home}/.local/share/mise"
@@ -18,7 +18,7 @@ in {
       if [ ! -f "${venvDir}/bin/python" ]; then
         sudo --user=${user} "$MISE_PYTHON/bin/python" -m venv "${venvDir}"
       fi
-      sudo --user=${user} "${venvDir}/bin/pip" install -q --upgrade mlx-lm 2>/dev/null
+      sudo --user=${user} "${venvDir}/bin/pip" install -q --upgrade mlx-vlm 2>/dev/null
     else
       echo >&2 "warning: mise python not found, skipping MLX venv setup"
     fi
@@ -28,12 +28,12 @@ in {
     serviceConfig = {
       ProgramArguments = [
         "${venvPython}"
-        "-m" "mlx_lm.server"
+        "-m" "mlx_vlm.server"
         "--model" model
         "--host" "0.0.0.0"
         "--port" port
-        "--kv-bits" "4"
-        "--kv-group-size" "64"
+        "--kv-bits" "3.5"
+        "--kv-quant-scheme" "turboquant"
       ];
       EnvironmentVariables = {
         HF_HOME = hfHome;
