@@ -1,5 +1,8 @@
 { ... }:
 
+let
+  username = "rk76fewf";
+in
 {
   imports = [
     ../../modules/system.nix
@@ -8,13 +11,17 @@
     ../../modules/mlx.nix
   ];
 
-  networking.hostName = "macmini";
-  system.primaryUser = "rk76fewf";
+  # Home Manager global settings
+  home-manager.useGlobalPkgs = true;
+  home-manager.useUserPackages = true;
 
-  users.users.rk76fewf = {
-    name = "rk76fewf";
-    home = "/Users/rk76fewf";
+  networking.hostName = "macmini";
+  system.primaryUser = username;
+
+  users.users.${username} = {
+    name = username;
+    home = "/Users/${username}";
   };
 
-  home-manager.users.rk76fewf = import ../../modules/home.nix;
+  home-manager.users.${username} = import ../../modules/home.nix;
 }

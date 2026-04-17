@@ -30,11 +30,11 @@
 
   # SSH directory permissions and config.local (create empty if not exists)
   home.activation.deploySsh = lib.hm.dag.entryAfter [ "writeBoundary" ] ''
-    mkdir -p "$HOME/.ssh"
-    chmod 700 "$HOME/.ssh"
     if [ ! -e "$HOME/.ssh/config.local" ]; then
       install -m 0600 /dev/null "$HOME/.ssh/config.local"
+    else
+      # Ensure permissions are correct even if file exists
+      chmod 0600 "$HOME/.ssh/config.local"
     fi
-    chmod 600 "$HOME/.ssh/config.local"
   '';
 }
