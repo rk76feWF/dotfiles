@@ -8,9 +8,8 @@ let
   hfHome = "${home}/Models/huggingface";
   model = "mlx-community/gemma-4-e4b-it-4bit";
   port = "8081";
-  serverScript = ./mlx-server.py;
 in {
-  # Ensure venv with mlx-lm and turboquant is created
+  # Ensure venv with mlx-lm is created
   system.activationScripts.postActivation.text = lib.mkAfter ''
     echo >&2 "setting up MLX venv..."
     MISE_DATA_DIR="${home}/.local/share/mise"
@@ -20,7 +19,6 @@ in {
         sudo --user=${user} "$MISE_PYTHON/bin/python" -m venv "${venvDir}"
       fi
       sudo --user=${user} "${venvDir}/bin/pip" install -q --upgrade mlx-lm 2>/dev/null
-      sudo --user=${user} "${venvDir}/bin/pip" install -q --upgrade "turboquant-mlx @ git+https://github.com/arozanov/turboquant-mlx.git" 2>/dev/null
     else
       echo >&2 "warning: mise python not found, skipping MLX venv setup"
     fi
@@ -30,10 +28,12 @@ in {
     serviceConfig = {
       ProgramArguments = [
         "${venvPython}"
-        "${serverScript}"
+        "-m" "mlx_lm.server"
         "--model" model
         "--host" "0.0.0.0"
         "--port" port
+        "--kv-bits" "4"
+        "--kv-group-size" "64"
       ];
       EnvironmentVariables = {
         HF_HOME = hfHome;
