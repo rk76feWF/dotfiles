@@ -13,7 +13,8 @@ in {
   # Ensure venv with mlx-lm and turboquant is created
   system.activationScripts.postActivation.text = lib.mkAfter ''
     echo >&2 "setting up MLX venv..."
-    MISE_PYTHON="$(sudo --user=${user} ${pkgs.mise}/bin/mise where python 2>/dev/null || true)"
+    MISE_DATA_DIR="${home}/.local/share/mise"
+    MISE_PYTHON="$MISE_DATA_DIR/installs/python/$(ls "$MISE_DATA_DIR/installs/python/" 2>/dev/null | head -1)"
     if [ -n "$MISE_PYTHON" ] && [ -x "$MISE_PYTHON/bin/python" ]; then
       if [ ! -f "${venvDir}/bin/python" ]; then
         sudo --user=${user} "$MISE_PYTHON/bin/python" -m venv "${venvDir}"
