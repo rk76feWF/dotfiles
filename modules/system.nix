@@ -20,6 +20,9 @@ in {
 
   # macOS system preferences
   system.defaults = {
+    loginwindow = {
+      autoLoginUser = "${user}";
+    };
     dock = {
       autohide = true;
       show-recents = false;
