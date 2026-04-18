@@ -76,6 +76,9 @@ in {
       chown -R ${user}:staff "$WHISPER_MODEL_DIR/ggml-large-v3-turbo-encoder.mlmodelc"
     fi
 
+    # Set audio volume and unmute
+    /usr/bin/osascript -e 'set volume output volume 50 without output muted'
+
     # Install Rosetta 2 if not present
     if ! /usr/sbin/pkgutil --pkg-info com.apple.pkg.RosettaUpdateAuto >/dev/null 2>&1; then
       /usr/sbin/softwareupdate --install-rosetta --agree-to-license
