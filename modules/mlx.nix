@@ -7,7 +7,7 @@ let
   venvPython = "${venvDir}/bin/python";
   hfHome = "${home}/Models/huggingface";
   mlxVlmVersion = "0.4.4";
-  model = "mlx-community/gemma-4-e4b-it-4bit";
+  model = "mlx-community/gemma-4-26b-a4b-it-4bit";
   port = "8081";
 in {
   # Ensure venv with mlx-vlm is created
