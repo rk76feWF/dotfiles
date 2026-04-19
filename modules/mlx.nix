@@ -39,8 +39,8 @@ in {
       EnvironmentVariables = {
         HF_HOME = hfHome;
       };
-      KeepAlive = true;
-      RunAtLoad = true;
+      KeepAlive = false;
+      RunAtLoad = false;
       StandardOutPath = "/tmp/mlx-server.log";
       StandardErrorPath = "/tmp/mlx-server.err";
     };
