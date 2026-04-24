@@ -31,6 +31,7 @@ in {
       ProgramArguments = [
         "${venvBin}"
         "serve" model
+        "--host" "0.0.0.0"
         "--port" port
         "--continuous-batching"
       ];
