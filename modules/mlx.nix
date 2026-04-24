@@ -5,13 +5,12 @@ let
   home = config.users.users.${user}.home;
   venvDir = "${home}/Models/.venv";
   venvPython = "${venvDir}/bin/python";
-  venvBin = "${venvDir}/bin/vllm-mlx";
   hfHome = "${home}/Models/huggingface";
-  vllmMlxVersion = "0.2.9";
+  mlxVlmVersion = "0.4.4";
   model = "mlx-community/gemma-4-e4b-it-4bit";
-  port = "8000";
+  port = "8081";
 in {
-  # Ensure venv with vllm-mlx is created
+  # Ensure venv with mlx-vlm is created
   system.activationScripts.setupMlxVenv.text = lib.mkAfter ''
     echo >&2 "setting up MLX venv..."
     MISE_DATA_DIR="${home}/.local/share/mise"
@@ -20,7 +19,7 @@ in {
       if [ ! -f "${venvDir}/bin/python" ]; then
         sudo --user=${user} "$MISE_PYTHON/bin/python" -m venv "${venvDir}"
       fi
-      sudo --user=${user} "${venvDir}/bin/pip" install -q --disable-pip-version-check "vllm-mlx==${vllmMlxVersion}" 2>/dev/null
+      sudo --user=${user} "${venvDir}/bin/pip" install -q --disable-pip-version-check "mlx-vlm==${mlxVlmVersion}" 2>/dev/null
     else
       echo >&2 "warning: mise python not found, skipping MLX venv setup"
     fi
@@ -29,11 +28,13 @@ in {
   launchd.user.agents.mlx-server = {
     serviceConfig = {
       ProgramArguments = [
-        "${venvBin}"
-        "serve" model
+        "${venvPython}"
+        "-m" "mlx_vlm.server"
+        "--model" model
         "--host" "0.0.0.0"
         "--port" port
-        "--continuous-batching"
+        "--kv-bits" "3.5"
+        "--kv-quant-scheme" "turboquant"
       ];
       EnvironmentVariables = {
         HF_HOME = hfHome;
