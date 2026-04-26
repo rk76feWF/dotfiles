@@ -42,7 +42,7 @@ in {
         "/usr/bin/osascript" "-e"
         ''tell application "FindMy" to activate''
       ];
-      StartInterval = 30;
+      StartInterval = 5;
       RunAtLoad = true;
     };
   };
