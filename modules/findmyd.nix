@@ -11,6 +11,26 @@ let
   fmipKeyPath = "${dbDir}/fmip.key";
   fmfKeyPath = "${dbDir}/fmf.key";
   op = pkgs._1password-cli;
+
+  keepaliveScript = pkgs.writeShellScript "findmy-keepalive" ''
+    CACHE="${home}/Library/Caches/com.apple.findmy.fmipcore/Devices.data"
+    STALE_SECONDS=60
+
+    if [ -f "$CACHE" ]; then
+      mtime=$(stat -f %m "$CACHE")
+      now=$(date +%s)
+      age=$(( now - mtime ))
+      if [ "$age" -gt "$STALE_SECONDS" ]; then
+        /usr/bin/osascript -e 'tell application "FindMy" to quit'
+        sleep 2
+        /usr/bin/osascript -e 'tell application "FindMy" to activate'
+      else
+        /usr/bin/osascript -e 'tell application "FindMy" to activate'
+      fi
+    else
+      /usr/bin/osascript -e 'tell application "FindMy" to activate'
+    fi
+  '';
 in {
   system.activationScripts.setupFindmyd.text = lib.mkAfter ''
     install -d -m 0700 -o ${user} -g staff "${dbDir}"
@@ -45,10 +65,9 @@ in {
   launchd.user.agents.findmy-keepalive = {
     serviceConfig = {
       ProgramArguments = [
-        "/usr/bin/osascript" "-e"
-        ''tell application "FindMy" to activate''
+        "${keepaliveScript}"
       ];
-      StartInterval = 5;
+      StartInterval = 10;
       RunAtLoad = true;
     };
   };
