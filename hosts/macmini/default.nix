@@ -9,6 +9,7 @@ in
     ../../modules/homebrew.nix
     ../../modules/packages.nix
     ../../modules/mlx.nix
+    ../../modules/findmyd.nix
   ];
 
   # Home Manager global settings

@@ -32,7 +32,6 @@ in {
     # GUI apps via Homebrew Cask
     casks = [
       "1password"
-      "1password-cli"
       "affinity"
       "antigravity"
       "bitwarden"

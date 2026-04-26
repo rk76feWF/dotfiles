@@ -17,6 +17,26 @@
         "type": "github"
       }
     },
+    "findmyd": {
+      "inputs": {
+        "nixpkgs": [
+          "nixpkgs"
+        ]
+      },
+      "locked": {
+        "lastModified": 1777213358,
+        "narHash": "sha256-30nUOq1x4R36WF5n7GWfRu/n5p3FMUN1IprJ8jvkcvM=",
+        "ref": "refs/heads/main",
+        "rev": "2d5fb64d81c3b2221f58e08d2c33beea3ee83266",
+        "revCount": 5,
+        "type": "git",
+        "url": "ssh://git@github.com/rk76feWF/findmyd.git"
+      },
+      "original": {
+        "type": "git",
+        "url": "ssh://git@github.com/rk76feWF/findmyd.git"
+      }
+    },
     "home-manager": {
       "inputs": {
         "nixpkgs": [
@@ -93,6 +113,7 @@
     },
     "root": {
       "inputs": {
+        "findmyd": "findmyd",
         "home-manager": "home-manager",
         "nix-darwin": "nix-darwin",
         "nix-homebrew": "nix-homebrew",

@@ -3,6 +3,7 @@
 {
   # CLI tools from Nix store
   environment.systemPackages = with pkgs; [
+    _1password-cli
     git
     git-lfs
     vim
