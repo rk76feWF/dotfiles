@@ -24,11 +24,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1777216416,
-        "narHash": "sha256-1PdJ8N5M0FP0fpkUWb+Xr3QImTq4Yoxyj4n260az0R8=",
+        "lastModified": 1777218391,
+        "narHash": "sha256-H5q7fPsZVbn4osmBSE/BfNWoN5TIxsE6Dh8YiuRFObU=",
         "ref": "refs/heads/main",
-        "rev": "a796f515a79468e89e99ae8c04b76c9808195c58",
-        "revCount": 11,
+        "rev": "0cb6bd9721982f2336b0d88195d4c863db19879c",
+        "revCount": 12,
         "type": "git",
         "url": "ssh://git@github.com/rk76feWF/findmyd.git"
       },
