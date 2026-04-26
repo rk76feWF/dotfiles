@@ -35,4 +35,15 @@ in {
       StandardErrorPath = "/tmp/findmyd.err";
     };
   };
+
+  launchd.user.agents.findmy-keepalive = {
+    serviceConfig = {
+      ProgramArguments = [
+        "/usr/bin/osascript" "-e"
+        ''tell application "FindMy" to activate''
+      ];
+      StartInterval = 30;
+      RunAtLoad = true;
+    };
+  };
 }
