@@ -37,7 +37,7 @@ in {
         "--thinking-budget" "1024"
         "--kv-bits" "3.5"
         "--kv-quant-scheme" "turboquant"
-        "--max-kv-size" "16384"
+        "--max-kv-size" "32768"
         "--max-num-seqs" "1"
       ];
       EnvironmentVariables = {
