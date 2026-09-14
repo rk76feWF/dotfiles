@@ -6,11 +6,11 @@ let
   venvDir = "${home}/Models/.venv";
   venvPython = "${venvDir}/bin/python";
   hfHome = "${home}/Models/huggingface";
-  mlxVlmVersion = "0.4.4";
-  model = "mlx-community/gemma-4-e4b-it-4bit";
+  mlxLmVersion = "0.31.3";
+  model = "ornith-ai/Ornith-1.5-9B-MLX-4bit";
   port = "8081";
 in {
-  # Ensure venv with mlx-vlm is created
+  # Ensure venv with mlx-lm is created
   system.activationScripts.setupMlxVenv.text = lib.mkAfter ''
     echo >&2 "setting up MLX venv..."
     MISE_DATA_DIR="${home}/.local/share/mise"
@@ -19,7 +19,7 @@ in {
       if [ ! -f "${venvDir}/bin/python" ]; then
         sudo --user=${user} "$MISE_PYTHON/bin/python" -m venv "${venvDir}"
       fi
-      sudo --user=${user} "${venvDir}/bin/pip" install -q --disable-pip-version-check "mlx-vlm==${mlxVlmVersion}" 2>/dev/null
+      sudo --user=${user} "${venvDir}/bin/pip" install -q --disable-pip-version-check "mlx-lm==${mlxLmVersion}" 2>/dev/null
     else
       echo >&2 "warning: mise python not found, skipping MLX venv setup"
     fi
@@ -29,12 +29,11 @@ in {
     serviceConfig = {
       ProgramArguments = [
         "${venvPython}"
-        "-m" "mlx_vlm.server"
+        "-m" "mlx_lm" "server"
         "--model" model
         "--host" "0.0.0.0"
         "--port" port
-        "--kv-bits" "3.5"
-        "--kv-quant-scheme" "turboquant"
+        "--max-tokens" "8192"
       ];
       EnvironmentVariables = {
         HF_HOME = hfHome;
