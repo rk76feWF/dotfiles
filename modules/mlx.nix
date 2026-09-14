@@ -34,13 +34,15 @@ in {
         "--host" "0.0.0.0"
         "--port" port
         "--max-tokens" "4096"
-        "--thinking-budget" "1024"
+        "--enable-thinking"
+        "--thinking-budget" "512"
         "--kv-bits" "3.5"
         "--kv-quant-scheme" "turboquant"
         "--max-kv-size" "32768"
         "--max-num-seqs" "1"
       ];
       EnvironmentVariables = {
+        APC_ENABLED = "1";
         HF_HOME = hfHome;
       };
       KeepAlive = false;
